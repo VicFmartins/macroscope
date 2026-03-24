@@ -112,6 +112,7 @@ jobs:
       RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       RAILWAY_PROJECT_ID: ${{ vars.RAILWAY_PROJECT_ID }}
       RAILWAY_SERVICE_ID: ${{ vars.RAILWAY_SERVICE_ID }}
+      RAILWAY_ENVIRONMENT: production
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -122,7 +123,7 @@ jobs:
           node-version: '20'
 
       - name: Deploy backend
-        run: npx @railway/cli up --service "${RAILWAY_SERVICE_ID}" --project "${RAILWAY_PROJECT_ID}" --detach --ci
+        run: npx @railway/cli up --service "${RAILWAY_SERVICE_ID}" --project "${RAILWAY_PROJECT_ID}" --environment "${RAILWAY_ENVIRONMENT}" --detach --ci
 
   deploy-frontend:
     name: Deploy Frontend to Vercel
