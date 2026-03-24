@@ -134,7 +134,7 @@ GitHub Actions workflow:
 
 Required GitHub secrets:
 
-- `RAILWAY_TOKEN`
+- `RAILWAY_API_TOKEN`
 - `VERCEL_TOKEN`
 
 Required GitHub Actions variables:
