@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "validate-env": "node ./scripts/validate-env.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.15",
+    "@sentry/nextjs": "^10.45.0",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "@radix-ui/react-select": "^2.1.1",
@@ -31,7 +33,7 @@
     "@types/react-simple-maps": "^3.0.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
-    "eslint-config-next": "14.2.15",
+    "eslint-config-next": "14.2.35",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "typescript": "^5"

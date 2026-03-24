@@ -40,6 +40,12 @@ server:
   port: ${PORT:${SERVER_PORT:8080}}
   forward-headers-strategy: framework
 
+sentry:
+  dsn: ${SENTRY_DSN:}
+  environment: ${SENTRY_ENVIRONMENT:${APP_ENV:local}}
+  traces-sample-rate: ${SENTRY_TRACES_SAMPLE_RATE:0.0}
+  send-default-pii: false
+
 management:
   endpoints:
     web:
@@ -78,6 +84,13 @@ macroscope:
 
   web:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000}
+
+  security:
+    app-environment: ${APP_ENV:local}
+    collection-trigger-api-key: ${COLLECTION_TRIGGER_API_KEY:}
+    rate-limit-window-seconds: ${RATE_LIMIT_WINDOW_SECONDS:60}
+    rate-limit-max-requests: ${RATE_LIMIT_MAX_REQUESTS:120}
+    rate-limit-max-trigger-requests: ${RATE_LIMIT_MAX_TRIGGER_REQUESTS:5}
 
 logging:
   level:

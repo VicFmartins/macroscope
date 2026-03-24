@@ -12,6 +12,7 @@ import type {
   TriggerCollectionResponse,
   Trend,
 } from '@/types'
+import * as Sentry from '@sentry/nextjs'
 import {
   COUNTRY_MAP,
   COUNTRIES,
@@ -22,12 +23,9 @@ import {
   MOCK_METRICS,
   MOCK_TREND_DATA,
 } from './mock-data'
+import { appEnv } from './env'
 
-const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_BASE_URL ??
-  process.env.NEXT_PUBLIC_API_URL ??
-  'http://localhost:8080'
-).replace(/\/$/, '')
+const API_BASE_URL = appEnv.apiBaseUrl
 
 const REQUEST_TIMEOUT_MS = 6500
 const MAX_RETRIES = 2
@@ -146,6 +144,13 @@ async function fetchJson<T>(path: string, options?: RequestInit): Promise<T> {
       clearTimeout(timeoutId)
     }
   }
+
+  Sentry.captureException(lastError, {
+    tags: {
+      area: 'api',
+      path,
+    },
+  })
 
   throw lastError instanceof Error ? lastError : new Error('Request failed')
 }
@@ -430,7 +435,12 @@ export async function getInsights(): Promise<ApiResult<AIInsight[]>> {
 
 export async function triggerCollection(): Promise<ApiResult<TriggerCollectionResponse>> {
   try {
-    const response = await fetchJson<TriggerCollectionResponse>('/collect/trigger', { method: 'POST' })
+    const response = await fetchJson<TriggerCollectionResponse>('/collect/trigger', {
+      method: 'POST',
+      headers: appEnv.collectionTriggerApiKey
+        ? { 'X-API-Key': appEnv.collectionTriggerApiKey }
+        : undefined,
+    })
     return {
       data: response,
       meta: buildLiveMeta(),
