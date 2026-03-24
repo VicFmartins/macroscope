@@ -134,8 +134,6 @@ jobs:
       run:
         working-directory: frontend
     env:
-      NEXT_PUBLIC_API_BASE_URL: https://api.macroscope
-      NEXT_PUBLIC_SITE_URL: https://app.macroscope
       VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
     steps:
