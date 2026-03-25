@@ -244,4 +244,4 @@ Frontend local:
 
 ## Autor
 
-Projeto desenvolvido por **Vitor Martins**, com foco em arquitetura moderna, resiliência operacional, observabilidade e experiência de produto para análise econômica global.
+Projeto desenvolvido por **Vitoria Martins**, com foco em arquitetura moderna, resiliência operacional, observabilidade e experiência de produto para análise econômica global.
